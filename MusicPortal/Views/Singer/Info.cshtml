@@ -1,0 +1,35 @@
+﻿@model MusicPortal.Models.Singers
+@{
+    ViewData["Title"] = "Виконавець";
+}
+
+<link rel="stylesheet" href="~/css/singer.css" asp-append-version="true" />
+<div class="singer-page">
+    <h1>@Model.Singer</h1>
+    <div class="songs">
+        @foreach (var item in Model.Songs)
+        {
+            <div class="song-card">
+                <div class="song-image">
+                    <img src="@item.Foto" alt="@item.NameOfSong" />
+                </div>
+                <div class="song-info">
+                    <h2>@item.NameOfSong</h2>
+                    <h2>@item.Singer?.Singer</h2>
+
+                    <audio controls>
+                        <source src="@item.AudioPath" />
+                        Ваш браузер не підтримує відтворення аудіо.
+                    </audio>
+                    <a href="@item.AudioPath"
+                       class="download-button"
+                       download
+                       title="Скачати">
+                        <i data-lucide="download"></i>
+                    </a>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>

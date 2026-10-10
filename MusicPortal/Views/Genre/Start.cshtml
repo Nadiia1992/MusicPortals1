@@ -1,0 +1,22 @@
+﻿@model IEnumerable<MusicPortal.Models.Genres>
+@{
+    ViewData["Title"] = "Жанри";
+}
+
+<link rel="stylesheet" href="~/css/genre.css" asp-append-version="true" />
+<div class="genre-page">
+<div class="genres">
+
+    @foreach (var item in Model)
+    {
+        <a asp-controller="Genre" asp-action="Details" asp-route-id=@item.Id" class="genre-container">
+            <div class="genre-card">
+            <h4>@item.Genre</h4>
+            </div>
+        </a>
+    }
+    </div>
+      
+    </div>
+
+  

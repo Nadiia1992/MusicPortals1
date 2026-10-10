@@ -1,0 +1,20 @@
+﻿@model IEnumerable<MusicPortal.Models.Singers>
+@{
+    ViewData["Title"] = "Виконавці";
+}
+<link rel="stylesheet" href="~/css/singer.css" asp-append-version="true" />
+<div class="singer-page">
+    <div class="singers">
+
+        @foreach (var item in Model)
+        {
+            <a asp-controller="Singer" asp-action="Info" asp-route-id="@item.Id" class="singer-container">
+                    <div class="singer-card">
+                        <img src="@item.Image" alt="@item.Singer" />
+                    </div>
+                <h4>@item.Singer</h4>
+            </a>
+        }
+    </div>
+
+</div>

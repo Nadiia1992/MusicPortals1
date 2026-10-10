@@ -1,0 +1,172 @@
+﻿.singer-page {
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 40px 20px;
+}
+
+.singers {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 25px;
+    padding: 40px;
+}
+
+
+.singer-container {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.singer-card {
+    width: 180px;
+    height: 180px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient( 145deg, rgba(20, 22, 24, 0.96), rgba(55, 59, 62, 0.96) );
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 15px rgba(255, 143, 196, 0.05);
+    transition: all 0.3s ease;
+}
+
+    .singer-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+    }
+
+.singer-container h4 {
+    margin: 12px 0 0;
+    color: #f5f5f5;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.singer-container:hover .singer-card {
+    transform: translateY(-6px);
+
+    border-color: rgba(255, 143, 196, 0.45);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.55),
+        0 0 20px rgba(255, 143, 196, 0.18);
+}
+
+.singer-container:hover h4 {
+    color: #ff8fc4;
+}
+
+.song-card {
+    width: 100%;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 12px 18px;
+    box-sizing: border-box;
+    background: linear-gradient( 145deg, rgba(20, 22, 24, 0.96), rgba(55, 59, 62, 0.96) );
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 15px rgba(255, 143, 196, 0.05);
+    transition: all 0.3s ease;
+}
+
+    .song-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(255, 143, 196, 0.4);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.55), 0 0 20px rgba(255, 143, 196, 0.15);
+    }
+
+.song-image {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+    .song-image img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
+
+
+.song-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    padding-left: 25px;
+    gap: 100px;
+}
+
+
+    .song-info .singer {
+        width: 180px;
+        flex-shrink: 0;
+        color: #aeb2b5;
+        font-size: 16px;
+    }
+
+    .song-info h2 {
+        width: 220px;
+        flex-shrink: 0;
+        margin: 0;
+        color: #f5f5f5;
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+
+    .song-info audio {
+        flex: 1;
+        min-width: 200px;
+        max-width: 500px;
+        height: 40px;
+    }
+
+.download-button {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d5d8da;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+    .download-button svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .download-button:hover {
+        color: #ff8fc4;
+        border-color: rgba(255, 143, 196, 0.4);
+        background: rgba(255, 105, 170, 0.08);
+        box-shadow: 0 0 12px rgba(255, 143, 196, 0.2);
+    }

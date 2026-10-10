@@ -11,6 +11,8 @@ namespace MusicPortal.Models
         [Display(Name = "Виконавець")]
         public string? Singer { get; set; }
 
+        public string ? Image { get; set; }
+
         public ICollection<Song> Songs { get; set; } = new List<Song>();
 
     }

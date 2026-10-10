@@ -17,6 +17,7 @@ namespace MusicPortal.Models
 
         [Display(Name = "Фото")]
         public string? Foto { get; set; }
+        public string? AudioPath { get; set; }
 
         public int UserId { get; set; }
         public Users? User { get; set; }

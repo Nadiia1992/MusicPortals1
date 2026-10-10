@@ -1,0 +1,73 @@
+﻿@model MusicPortal.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Реєстрація";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
+<div class="register-page">
+
+<div class="register-card">
+    <div class="register-card-header">
+            <div class="register-icon">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 24 24"
+                     fill="currentColor">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4z" />
+                </svg>
+            </div>
+                <h2>Реєстрація</h2>
+                <p>Створіть новий обліковий запис</p>
+                </div>
+                <div class="register-card-body">
+                <form asp-action="Register">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="register-row">
+                        <div class="register-field">
+                
+                                <input asp-for="FirstName" class="register-input" placeholder="Ваше ім'я" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                        
+                        <div class="register-field">
+                                <input asp-for="LastName" class="register-input" placeholder="Ваше прізвище" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                   
+
+                    <div class="register-field">
+                        <input asp-for="Login" class="register-input" placeholder="Логін" />
+                        <span asp-validation-for="Login" class="text-danger"></span>
+                    </div>
+
+                    <div class="register-field">
+                        <input asp-for="Email" class="register-input" placeholder="Ваш Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="register-field">
+                        <input asp-for="Password" class="register-input" placeholder="Ваш Пароль" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="register-field">
+                        <input asp-for="PasswordConfirm" class="register-input" placeholder="Повторіть пароль" />
+                        <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                    </div>
+
+                    <div class="register-buttons">
+                        <button type="submit" class="register-submit">Зареєструватися</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

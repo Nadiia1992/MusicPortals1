@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\music\" />
     <Folder Include="wwwroot\picture\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Models\SortState.cs" />
   </ItemGroup>
 
   <ItemGroup>

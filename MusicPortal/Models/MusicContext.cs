@@ -79,18 +79,30 @@ namespace MusicPortal.Models
          );
 
             modelBuilder.Entity<Singers>().HasData(
-             new Singers { Id = 1, Singer = "Shakira" },
-             new Singers { Id = 2, Singer = "Adele" },
-             new Singers { Id = 3, Singer = "Imagine Dragons" },
-             new Singers { Id = 4, Singer = "Eminem" },
-             new Singers { Id = 5, Singer = "The Weeknd" },
-             new Singers { Id = 6, Singer = "Kimo Sounds" }
+             new Singers { Id = 1, Singer = "Shakira", Image = "/image/shakira.jpg"},
+             new Singers { Id = 2, Singer = "Adele", Image = "/image/adele.jpg" },
+             new Singers { Id = 3, Singer = "Imagine Dragons", Image = "/image/imagine-dragons.jpg" },
+             new Singers { Id = 4, Singer = "Eminem", Image = "/image/eminem.jpg" },
+             new Singers { Id = 5, Singer = "The Weeknd", Image = "/image/the-weeknd.jpg" },
+             new Singers { Id = 6, Singer = "Kimo Sounds", Image = "/image/kimo-sounds.jpg" }
           );
 
             modelBuilder.Entity<Song>().HasData(
-             new Song { Id = 1, NameOfSong = "Dai Dai", Foto = "/picture/foto2.jpg", SingersId = 1, GenreId = 2, UserId = 1 },
-             new Song { Id = 2, NameOfSong = "Someone Like You", Foto = "/picture/adele-someone-like-you.jpg", SingersId = 2, GenreId = 1, UserId = 1 },
-             new Song { Id = 3, NameOfSong = "Rise Slow", Foto = "/picture/song1.jpg", SingersId = 6, GenreId = 1, UserId = 1 }
+             new Song { Id = 1, NameOfSong = "Dai Dai", Foto = "/picture/foto2.jpg",
+                 AudioPath = "/music/Shakira Dai Dai (feat. Burna Boy).mp4",
+                 SingersId = 1, GenreId = 2, UserId = 1 },
+             new Song
+             {
+                 Id = 2,
+                 NameOfSong = "Waka Waka (Dj Dark Remix)",
+                 Foto = "/picture/shakira-waka-waka-dj-dark-remix.webp.jpg",
+                 AudioPath = "/music/Shakira - Waka Waka (Dj Dark Remix).mp3",
+                 SingersId = 1,
+                 GenreId = 2,
+                 UserId = 3
+             },
+             new Song { Id = 3, NameOfSong = "Someone Like You", Foto = "/picture/adele-someone-like-you.jpg", AudioPath = "/music/Adele - Someone Like You.mp3", SingersId = 2, GenreId = 2, UserId = 1 },
+             new Song { Id = 4, NameOfSong = "Rise Slow", Foto = "/picture/song1.jpg", AudioPath = "/music/Kimo Sounds Rise Slow.mp4", SingersId = 6, GenreId = 1, UserId = 1 }
            );
         }
 

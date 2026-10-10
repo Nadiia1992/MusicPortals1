@@ -23,6 +23,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IRepositoryUser, UserRepository>();
 builder.Services.AddScoped<IRepositorySong, SongRepository>();
+builder.Services.AddScoped<IRepositoryGenre, GenreRepository>();
+builder.Services.AddScoped<IRepositorySinger, SingerRepository>();
 builder.Services.AddScoped<PasswordHasher>();
 
 
