@@ -8,12 +8,31 @@ namespace MusicPortal.Repository
     {
         public async Task<IEnumerable<Song>> GetSongListAsync()
         {
-            return await context.Songs.Include(p => p.User).AsNoTracking().ToListAsync();
+            return await context.Songs
+                .Where(p => !p.IsAccept)
+                .Include(p => p.User)
+                .Include(p => p.Singer)
+                .Include(p => p.Genre)
+                .AsNoTracking().ToListAsync();
         }
 
+        public async Task<IEnumerable<Song>> GetAcceptedSongsAsync()
+        {
+            return await context.Songs
+                .Where(p => p.IsAccept)
+                .Include(p => p.Singer)
+                .Include(p => p.Genre)
+                .AsNoTracking()
+                .ToListAsync();
+        }
         public async Task<IEnumerable<Song>> GetSongsBySingerAsync(int singerId)
         {
-            return await context.Songs.Where(p => p.SingersId == singerId).AsNoTracking().ToListAsync();
+            return await context.Songs
+                .Where(p => p.SingersId == singerId)
+                .Include(p => p.Singer)
+                .Include(p => p.Genre)
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<Song?> GetSongAsync(int id)

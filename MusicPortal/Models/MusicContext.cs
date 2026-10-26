@@ -69,6 +69,7 @@ namespace MusicPortal.Models
                     Email = "Sofi@gmail.com",
                     Password = "zxcvb",
                 }
+
             );
 
             modelBuilder.Entity<Genres>().HasData(
@@ -90,7 +91,7 @@ namespace MusicPortal.Models
             modelBuilder.Entity<Song>().HasData(
              new Song { Id = 1, NameOfSong = "Dai Dai", Foto = "/picture/foto2.jpg",
                  AudioPath = "/music/Shakira Dai Dai (feat. Burna Boy).mp4",
-                 SingersId = 1, GenreId = 2, UserId = 1 },
+                 SingersId = 1, GenreId = 2, UserId = 1, IsAccept = true },
              new Song
              {
                  Id = 2,
@@ -99,10 +100,11 @@ namespace MusicPortal.Models
                  AudioPath = "/music/Shakira - Waka Waka (Dj Dark Remix).mp3",
                  SingersId = 1,
                  GenreId = 2,
-                 UserId = 3
+                 UserId = 3,
+                 IsAccept = true
              },
-             new Song { Id = 3, NameOfSong = "Someone Like You", Foto = "/picture/adele-someone-like-you.jpg", AudioPath = "/music/Adele - Someone Like You.mp3", SingersId = 2, GenreId = 2, UserId = 1 },
-             new Song { Id = 4, NameOfSong = "Rise Slow", Foto = "/picture/song1.jpg", AudioPath = "/music/Kimo Sounds Rise Slow.mp4", SingersId = 6, GenreId = 1, UserId = 1 }
+             new Song { Id = 3, NameOfSong = "Someone Like You", Foto = "/picture/adele-someone-like-you.jpg", AudioPath = "/music/Adele - Someone Like You.mp3", SingersId = 2, GenreId = 2, UserId = 1, IsAccept = true },
+             new Song { Id = 4, NameOfSong = "Rise Slow", Foto = "/picture/song1.jpg", AudioPath = "/music/Kimo Sounds Rise Slow.mp4", SingersId = 6, GenreId = 1, UserId = 1, IsAccept = true }
            );
         }
 

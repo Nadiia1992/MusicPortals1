@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="MusicPortal/MusicPortal.csproj" />
+  <Project Path="MusicPortalServer/MusicPortalServer.csproj" Id="a0d3999c-f14a-46e5-8fb0-5a6e629aab7f" />
 </Solution>

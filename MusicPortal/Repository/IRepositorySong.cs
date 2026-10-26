@@ -12,6 +12,6 @@ namespace MusicPortal.Repository
         Task DeleteSongAsync(Song item);
         Task EditSong(Song item);
         Task SaveAsync();
-        
+        Task<IEnumerable<Song>> GetAcceptedSongsAsync();
     }
 }

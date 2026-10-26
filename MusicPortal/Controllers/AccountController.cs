@@ -7,7 +7,7 @@ using MusicPortal.Models;
 
 namespace MusicPortal.Controllers
 {
-    public class AccountController(PasswordHasher passwordHasher, IRepositoryUser re) : Controller
+    public class AccountController(PasswordHasher passwordHasher, IRepositoryUser re, IRepositorySong repositorySong) : Controller
     {
         public IActionResult Login() => View();
 
@@ -37,7 +37,12 @@ namespace MusicPortal.Controllers
             HttpContext.Session.SetString("FirstName", user.FirstName!);
             HttpContext.Session.SetString("LastName", user.LastName!);
 
-            return RedirectToAction("Login", "Account");
+            if (user.Login == "ADMIN")
+            {
+                return RedirectToAction("Admin", "Account");
+            }
+
+            return RedirectToAction("Clients", "Account");
         }
 
         public IActionResult Register() => View();
@@ -83,6 +88,21 @@ namespace MusicPortal.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public async Task<IActionResult> Clients()
+        {
+            var songes = await repositorySong.GetAcceptedSongsAsync();
+            return View(songes);
+        }
+
+        public IActionResult Admin()
+        {
+            if (HttpContext.Session.GetString("Login") != "ADMIN")
+            {
+                return RedirectToAction("Clients", "Account");
+            }
+
+            return View();
+        }
 
     }
 }

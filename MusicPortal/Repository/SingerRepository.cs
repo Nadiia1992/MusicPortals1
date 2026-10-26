@@ -13,9 +13,11 @@ namespace MusicPortal.Repository
         public async Task<IEnumerable<Song>> GetSongsBySingerAsync(int singerId)
         {
             return await context.Songs
-               .Where(s => s.SingersId == singerId)
-               .Include(s => s.Genre)
-               .Include(s => s.Singer).AsNoTracking().ToListAsync();
+                .Where(p => p.SingersId == singerId && p.IsAccept)
+                .Include(p => p.Singer)
+                .Include(p => p.Genre)
+                .AsNoTracking()
+                .ToListAsync();
         }
         public async Task<Singers?> GetSingerAsync(int id)
         {

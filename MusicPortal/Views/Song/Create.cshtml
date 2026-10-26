@@ -1,0 +1,79 @@
+﻿@model MusicPortal.Models.Song
+
+@{
+    ViewData["Title"] = "Додати пісню";
+  
+}
+
+
+    <main class="create-song-page">
+        <div class="create-song-container">
+
+            <div class="create-song-heading">
+                <div class="create-song-icon">♫</div>
+                <h1>Додати нову пісню</h1>
+                <p>Після модерації пісню буде додано на сайті.</p>
+            </div>
+           
+            <div class="create-song-card">
+                <form asp-controller="Song" asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-4">
+                        <label asp-for="NameOfSong" class="form-label">Назва пісні</label>
+                        <input asp-for="NameOfSong" class="form-control music-input" placeholder="Введіть назву пісні" />
+                        <span asp-validation-for="NameOfSong" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-4"> <label for="posterFile" class="form-label">Обкладинка пісні</label>
+                        <input name="posterFile" class="form-control" type="file" accept="image/png, image/jpeg" placeholder="Завантажте фото" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="audioFile" class="form-label"> Аудіофайл пісні</label>
+                        <input type="file" id="audioFile" name="audioFile" class="music-input" accept="audio/*"/>
+                    </div>
+
+                    
+                    <div class="mb-4">
+                        <label asp-for="SingersId" class="form-label">Оберіть виконавця</label>
+                   
+                    <div class="mb-4">
+                        <label asp-for="SingersId" class="form-label">Виконавець</label>
+
+                        <select asp-for="SingersId" asp-items="ViewBag.Singers" class="form-select music-input">
+                            <option value="0">Оберіть виконавця зі списку</option>
+                        </select>
+
+                        <span asp-validation-for="SingersId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="newSingerName" class="form-label">Або додайте нового виконавця</label>
+
+                        <input type="text" id="newSingerName" name="newSingerName" class="form-control music-input"
+                         placeholder="Введіть ім'я нового виконавця" maxlength="100" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="GenreId" class="form-label">Жанр</label>
+                        <select asp-for="GenreId" asp-items="ViewBag.Genres" class="form-select music-input">
+                            <option value="">Оберіть жанр</option>
+                        </select>
+                        <span asp-validation-for="GenreId"class="text-danger"></span>
+                    </div>
+
+                    <div class="create-song-actions">
+                        <a asp-controller="Account" asp-action="Clients" class="back-song-btn">Повернутися
+                        </a>
+
+                        <button type="submit" class="save-song-btn">
+                            <span>＋</span> Додати пісню
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+

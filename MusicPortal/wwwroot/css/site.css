@@ -1,20 +1,13 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
@@ -23,6 +16,16 @@ body {
     background: radial-gradient( ellipse at 20% 15%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.04) 25%, transparent 50% ), radial-gradient( ellipse at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 45% ), linear-gradient( 135deg, #101214 0%, #292d30 25%, #484d50 48%, #292d30 70%, #0f1113 100% );
     background-attachment: fixed;
     color: #f2f2f2;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 
@@ -38,132 +41,21 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 20px;
     width: 100%;
     box-sizing: border-box;
     padding: 0 20px;
     margin: 0;
+    min-height: 70px;
 }
 
 
-.navigation a {
-    position: relative;
-    color: #d5d8da;
-    text-decoration: none;
-    font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.8px;
-    margin-left: 20px;
-    
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-    .navigation a:hover {
-        color: #ffffff;
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
-    }
-
-    .navigation a::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -4px;
-        width: 0;
-        height: 2px;
-        background: linear-gradient( 90deg, transparent, #ff8fc4, transparent );
-        box-shadow: 0 0 8px rgba(255, 143, 196, 0.7);
-        transition: width 0.3s ease;
-    }
-
-    .navigation a:hover::after {
-        width: 100%;
-    }
-
-
-.page-container {
-    display: flex;
-    width: 100%;
-    box-sizing: border-box;
-    align-items: stretch;
-}
-
-    .page-container main {
-        flex: 1;
-        min-width: 0;
-    }
-
-
-.sidebar {
-    width: 65px;
-    box-sizing: border-box;
-    flex-shrink: 0;
-    padding: 25px 10px;
-    min-height: 100%;
-    background: radial-gradient( ellipse at 50% 100%, rgba(255, 80, 160, 0.18) 0%, rgba(180, 70, 120, 0.07) 35%, transparent 65% ), linear-gradient( 180deg, #020202 0%, #111315 25%, #292d30 50%, #484d50 75%, #382832 100% );
-    border-right: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.35);
-}
-
-
-    .sidebar-navigation {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-        .sidebar-navigation a {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
-            color: #d5d8da;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.25s ease;
-        }
-
-            .sidebar-navigation a svg {
-                width: 21px;
-                height: 21px;
-                transition: all 0.25s ease;
-            }
-
-           
-            .sidebar-navigation a:hover {
-                color: #ff8fc4;
-                background: rgba(255, 105, 170, 0.08);
-                filter: drop-shadow( 0 0 6px rgba(255, 105, 170, 0.35) );
-            }
-
-            .sidebar-navigation a span {
-                position: absolute;
-                left: 58px;
-                top: 50%;
-                transform: translateY(-50%) translateX(-8px);
-                padding: 8px 14px;
-                color: #ff8fc4;
-                background: linear-gradient( 135deg, #25282b, #41464a );
-                border: 1px solid rgba(255, 143, 196, 0.25);
-                border-radius: 7px;
-                white-space: nowrap;
-                opacity: 0;
-                visibility: hidden;
-                transition: opacity 0.2s ease, transform 0.2s ease;
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-            }
-
-            .sidebar-navigation a:hover span {
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(-50%) translateX(0);
-            }
 
 .logo {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-shrink: 0;
     color: #f5f5f5;
     text-decoration: none;
     font-family: "Segoe UI", Arial, sans-serif;
@@ -206,6 +98,439 @@ body {
     color: #d5d8da;
 }
 
+
+
+.navigat {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-left: auto;
+}
+
+
+
+    .navigat a.navigation {
+        position: relative;
+        display: inline-block;
+        flex-shrink: 0;
+        color: #d5d8da;
+        text-decoration: none;
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        margin: 0;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+        .navigat a.navigation:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
+        }
+
+
+        .navigat a.navigation::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient( 90deg, transparent, #ff8fc4, transparent );
+            box-shadow: 0 0 8px rgba(255, 143, 196, 0.7);
+            transition: width 0.3s ease;
+        }
+
+        .navigat a.navigation:hover::after {
+            width: 100%;
+        }
+
+
+
+.welcome-text {
+    display: inline-flex;
+    align-items: center;
+    color: #d5d8da;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+
+.logout-form {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.logout-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 18px;
+    border: 1px solid rgba(255, 143, 196, 0.3);
+    border-radius: 8px;
+    background: linear-gradient( 135deg, #292d30, #484d50 );
+    color: #d5d8da;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+    .logout-btn:hover {
+        color: #ff8fc4;
+        border-color: rgba(255, 143, 196, 0.6);
+        background: linear-gradient( 135deg, #34383c, #555b60 );
+        box-shadow: 0 0 12px rgba(255, 143, 196, 0.15);
+        transform: translateY(-2px);
+    }
+
+    .logout-btn:active {
+        transform: translateY(0);
+    }
+
+
+
+.page-container {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: stretch;
+}
+
+    .page-container main {
+        flex: 1;
+        min-width: 0;
+    }
+
+
+
+.sidebar {
+    width: 65px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    padding: 25px 10px;
+    min-height: 100%;
+    background: radial-gradient( ellipse at 50% 100%, rgba(255, 80, 160, 0.18) 0%, rgba(180, 70, 120, 0.07) 35%, transparent 65% ), linear-gradient( 180deg, #020202 0%, #111315 25%, #292d30 50%, #484d50 75%, #382832 100% );
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.35);
+}
+
+
+.sidebar-navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+    .sidebar-navigation a {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        color: #d5d8da;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.25s ease;
+    }
+
+        .sidebar-navigation a svg {
+            width: 21px;
+            height: 21px;
+            transition: all 0.25s ease;
+        }
+
+        .sidebar-navigation a:hover {
+            color: #ff8fc4;
+            background: rgba(255, 105, 170, 0.08);
+            filter: drop-shadow( 0 0 6px rgba(255, 105, 170, 0.35) );
+        }
+
+
+        .sidebar-navigation a span {
+            position: absolute;
+            left: 58px;
+            top: 50%;
+            transform: translateY(-50%) translateX(-8px);
+            padding: 8px 14px;
+            color: #ff8fc4;
+            background: linear-gradient( 135deg, #25282b, #41464a );
+            border: 1px solid rgba(255, 143, 196, 0.25);
+            border-radius: 7px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            z-index: 100;
+        }
+
+        .sidebar-navigation a:hover span {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-50%) translateX(0);
+        }
+
+
+.addsong-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 86%;
+    margin: 25px auto;
+    box-sizing: border-box;
+}
+
+.addsong {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 24px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #c02678, #8b5cf6);
+    border: 1px solid rgba(190, 160, 255, 0.4);
+    border-radius: 12px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 5px 18px rgba(91, 60, 164, 0.25);
+    transition: all 0.3s ease;
+}
+
+    .addsong:hover {
+        color: #ffffff;
+        text-decoration: none;
+        background: linear-gradient(135deg, #49316f, #7854c9);
+        border-color: rgba(255, 143, 196, 0.65);
+        box-shadow: 0 8px 25px rgba(91, 60, 164, 0.35), 0 0 18px rgba(255, 143, 196, 0.12);
+        transform: translateY(-3px);
+    }
+
+
+    .addsong:active {
+        transform: translateY(0) scale(0.98);
+    }
+
+    .addsong:focus-visible {
+        outline: 2px solid #ff8fc4;
+        outline-offset: 4px;
+    }
+
+
+
+.create-song-page {
+    min-height: 100vh;
+    padding: 55px 20px 70px;
+    box-sizing: border-box;
+    background: radial-gradient(ellipse at top, rgba(124, 58, 237, 0.12), transparent 55%), #100d18;
+}
+
+.create-song-container {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+
+.create-song-heading {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.create-song-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    margin: 0 auto 18px;
+    color: #fff;
+    background: linear-gradient(135deg, #7c3aed, #c084fc);
+    border-radius: 20px;
+    font-size: 26px;
+    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3);
+}
+
+.create-song-heading h1 {
+    margin: 0 0 12px;
+    color: #f5f3ff;
+    font-size: clamp(27px, 4vw, 36px);
+    font-weight: 400;
+}
+
+.create-song-heading p {
+    margin: 0;
+    color: #aaa2b9;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+.create-song-card {
+    padding: 35px;
+    background: rgba(30, 23, 43, 0.95);
+    border: 1px solid rgba(192, 132, 252, 0.17);
+    border-radius: 22px;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.22);
+}
+
+
+    .create-song-card .form-label {
+        display: block;
+        margin-bottom: 10px;
+        color: #e9ddf9;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+
+    .create-song-card .music-input,
+    .create-song-card .form-control,
+    .create-song-card .form-select {
+        display: block;
+        width: 100%;
+        min-height: 48px;
+        padding: 12px 15px;
+        box-sizing: border-box;
+        color: #f5f3ff;
+        background-color: #191421;
+        border: 1px solid #3a2d4b;
+        border-radius: 11px;
+        font-size: 14px;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .create-song-card input::placeholder {
+        color: #81758f;
+    }
+
+    .create-song-card .music-input:focus,
+    .create-song-card .form-control:focus,
+    .create-song-card .form-select:focus {
+        color: #fff;
+        background-color: #191421;
+        border-color: #a855f7;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+    }
+
+
+    .create-song-card .form-select option {
+        color: #f5f3ff;
+        background: #191421;
+    }
+
+
+    .create-song-card input[type="file"] {
+        min-height: auto;
+        padding: 10px;
+        color: #c9bdd8;
+        cursor: pointer;
+    }
+
+        .create-song-card input[type="file"]::file-selector-button {
+            margin-right: 12px;
+            padding: 9px 13px;
+            color: #e9d5ff;
+            background: #352345;
+            border: 1px solid #65418a;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+            .create-song-card input[type="file"]::file-selector-button:hover {
+                background: #50316d;
+            }
+
+
+    .create-song-card .text-danger {
+        display: block;
+        margin-top: 7px;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+
+.create-song-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    margin-top: 30px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+    .create-song-actions .back-song-btn,
+    .create-song-actions .save-song-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        min-height: 46px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border-radius: 11px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .create-song-actions .back-song-btn {
+        color: #d4c6e4;
+        background: #241c30;
+        border: 1px solid #443452;
+    }
+
+        .create-song-actions .back-song-btn:hover {
+            color: #fff;
+            background: #352643;
+            transform: translateY(-2px);
+        }
+
+
+    .create-song-actions .save-song-btn {
+        color: #fff;
+        background: linear-gradient(135deg, #7c3aed, #a855f7);
+        border: none;
+        box-shadow: 0 5px 16px rgba(124, 58, 237, 0.25);
+    }
+
+        .create-song-actions .save-song-btn:hover {
+            background: linear-gradient(135deg, #6d28d9, #9333ea);
+            box-shadow: 0 8px 22px rgba(124, 58, 237, 0.38);
+            transform: translateY(-2px);
+        }
+
+        .create-song-actions .save-song-btn:active,
+        .create-song-actions .back-song-btn:active {
+            transform: scale(0.98);
+        }
+
+    .create-song-actions button:focus-visible,
+    .create-song-actions a:focus-visible {
+        outline: 3px solid #c4b5fd;
+        outline-offset: 3px;
+    }
 
 
 

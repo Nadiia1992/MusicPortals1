@@ -1,0 +1,15 @@
+﻿@model IEnumerable<MusicPortal.Models.Song>
+
+@{
+    ViewData["Title"] = "Пісні на модерації";
+}
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+
+<h1>Панель адміністратора</h1>
+
+<a asp-controller="Song"
+   asp-action="forAccept"
+   class="moderation-link">
+    ♫ Пісні на модерації →
+</a>
+

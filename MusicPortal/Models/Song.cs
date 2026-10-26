@@ -28,5 +28,7 @@ namespace MusicPortal.Models
 
         public int GenreId { get; set; }
         public Genres? Genre { get; set; }
+
+        public bool IsAccept { get; set; } = false;
     }
 }

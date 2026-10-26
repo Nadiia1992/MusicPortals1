@@ -20,11 +20,12 @@
         <p>Будь ласка, увійдіть у свій обліковий запис</p>
     </div>
     <div class="login-card-body">
-        <form asp-action="Login">
+            <form asp-controller="Account" asp-action="Login">
+                
             <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
                     <div class="login-field">
-                        <input asp-for="Login" class="login-input" placeholder="Ваш E-Mail" />
+                        <input asp-for="Login" class="login-input" placeholder="Ваш Login" />
                     <span asp-validation-for="Login" class="text-danger"></span>
                     </div>
 

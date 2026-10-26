@@ -9,25 +9,70 @@
 </head>
 <body>
     <header class="site-header">
-            <div class="header-container">
+        <div class="header-container">
             <a asp-controller="Home" asp-action="Index" class="logo">
                 <img src="~/image/imagesLogo.jpg" alt="MusicPortal" />
                 <span class="logo-text">
                     <span class="music">Music</span><span class="portal">Portal</span>
                 </span>
             </a>
-                <nav class="navigation">
-                <a class="navigation" asp-controller="Account" asp-action="Login">Увійти</a>
-                    <a class="navigation" asp-controller="Account" asp-action="Register">Реєстрація</a>
-                </nav>            
-            </div>
-       </header>
+
+            <nav class="navigat">
+                @{
+                    var login = Context.Session.GetString("Login");
+                    var firstName = Context.Session.GetString("FirstName");
+                }
+
+                @if (login == "ADMIN")
+                {
+                    <span class="welcome-text">
+                        Вітаю, @(string.IsNullOrEmpty(firstName) ? login : firstName)!
+                    </span>
+
+                    <a asp-controller="Account" asp-action="Admin" class="addsong">
+                        <span class="plus">+</span>
+                        Панель адміністратора
+                    </a>
+
+                    <form asp-controller="Account"
+                          asp-action="Logout"
+                          method="post"
+                          class="logout-form">
+                        <button type="submit" class="logout-btn">Вийти</button>
+                    </form>
+                }
+
+                else if (!string.IsNullOrEmpty(login))
+                {
+                    <span class="welcome-text">
+                        Вітаю, @(string.IsNullOrEmpty(firstName) ? login : firstName)!
+                    </span>
+                    <a asp-controller="Song" asp-action="Create" class="addsong">
+                        <span class="plus">+</span>
+                        Додати пісню
+                    </a>
+                    <form asp-controller="Account" asp-action="Logout" method="post" class="logout-form">
+                        <button type="submit" class="logout-btn">Вийти</button>
+                    </form>
+                }
+                else
+                {
+                    <a class="navigation" asp-controller="Account" asp-action="Login">Увійти
+                    </a>
+
+                    <a class="navigation" asp-controller="Account" asp-action="Register"> Реєстрація
+                    </a>
+                }
+            </nav>
+
+    </header>
+
     <div class="page-container">
         <aside class="sidebar">
            
             <nav class="sidebar-navigation">
                 <a asp-controller="Home" asp-action="Index"><i data-lucide="house"></i><span>Головна</span></a>
-                <a asp-controller="Home" asp-action="Index"><i data-lucide="music"></i><span>Музика</span></a>
+                <a asp-controller="Song" asp-action="Index"><i data-lucide="music"></i><span>Музика</span></a>
                 <a asp-controller="Genre" asp-action="Start"><i data-lucide="audio-lines"></i><span>Жанри</span></a>
                 <a asp-controller="Singer" asp-action="Show"><i data-lucide="circle-user-round"></i><span>Виконавці</span></a>
                 </nav>

@@ -19,9 +19,12 @@ namespace MusicPortal.Repository
         }
         public async Task<Genres?> GetGenreAsync(int id)
         {
-            return await context.Genres.Include(g=> g.Songs).ThenInclude(s => s.Singer).FirstOrDefaultAsync(g => g.Id == id);
+            return await context.Genres
+                .Include(g => g.Songs.Where(s => s.IsAccept))
+                    .ThenInclude(s => s.Singer)
+                .FirstOrDefaultAsync(g => g.Id == id);
         }
-     
+
         public async Task<bool> GenreExistsAsync(string name)
         {
             return await context.Genres.AnyAsync(g => g.Genre == name);

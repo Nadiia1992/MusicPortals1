@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MusicPortal.Models.Song>
+@{
+    ViewData["Title"] = "Музика";
+}
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+
+
+<div class="songs">
+    @foreach (var item in Model)
+    {
+        <div class="song-card">
+            <div class="song-image">
+                <img src="@item.Foto" alt="@item.NameOfSong" />
+            </div>
+            <div class="song-info">
+                <h4>@item.NameOfSong</h4>
+                <h4>@item.Singer?.Singer</h4>
+                <p>@item.Genre?.Genre</p>
+
+                <audio controls>
+                    <source src="@item.AudioPath" />
+                    Ваш браузер не підтримує відтворення аудіо.
+                </audio>
+                <a href="@item.AudioPath"
+                   class="download-button"
+                   download
+                   title="Скачати">
+                    <i data-lucide="download"></i>
+                </a>
+
+            </div>
+        </div>
+    }
+
+</div>

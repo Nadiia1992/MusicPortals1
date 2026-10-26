@@ -10,7 +10,7 @@ namespace MusicPortal.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var songs = await repo.GetSongListAsync();
+            var songs = await repo.GetAcceptedSongsAsync();
             return View(songs);
         }
 
