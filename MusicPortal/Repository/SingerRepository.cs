@@ -32,14 +32,27 @@ namespace MusicPortal.Repository
             context.Singers.Add(item);
             await SaveAsync();
         }
-        public async Task DeleteSinger(Singers item)
+        public async Task DeleteSinger(int id)
+ 
         {
-            context.Singers.Remove(item);
-            await SaveAsync();
+            var singer = await context.Singers
+                .Include(g => g.Songs)
+                .FirstOrDefaultAsync(g => g.Id == id);
+
+            if (singer != null)
+            {
+                context.Songs.RemoveRange(singer.Songs);
+                context.Singers.Remove(singer);
+            }
         }
         public async Task SaveAsync()
         {
             await context.SaveChangesAsync();
+        }
+
+        public void Update(Singers si)
+        {
+            context.Singers.Update(si);
         }
     }
 }

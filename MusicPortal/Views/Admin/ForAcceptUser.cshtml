@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MusicPortal.Models.Users>
+
+@{
+    ViewData["Title"] = "Користувачі на модерації";
+}
+
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+<div class="for">
+    <h2>Користувачі на модерації</h2>
+    <p>Перегляньте профілі користувачів та підтвердьте їх реєстрацію</p>
+</div>
+@if (Model == null || !Model.Any())
+{
+    <div class="empty-moderation">
+        <span>♫</span>
+        <h3>Немає користувачів на модерації</h3>
+        <p>Нові користувачі з'являться тут після реєстрації.</p>
+    </div>
+}
+else
+{
+    <div class="songs">
+        @foreach (var item in Model)
+        {
+   
+                <div class="song-info">
+                    <h4>@item.FirstName @item.LastName</h4>
+                    <h4>@item.Login</h4>
+                    <p>@item.Email</p>
+
+
+                    <form asp-controller="Admin"
+                          asp-action="Accept"
+                          method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+
+                        <button type="submit" class="moderation-accept">
+                            ✓ Підтвердити
+                        </button>
+                    </form>
+
+                <form asp-controller="Admin" asp-action="DeleteUser" method="get">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button type="submit" class="delete-genre-btn">
+                        ✕ Відхилити
+                    </button>
+                </form>
+                </div>
+            
+        }
+    </div>
+}
+
+<a asp-controller="Admin"
+   asp-action="Index"
+   class="moderation-back">
+    ← Назад до панелі адміністратора
+</a>
+

@@ -1,0 +1,59 @@
+﻿@model MusicPortal.Models.Singers
+
+@{
+    ViewData["Title"] = "Редагування виконавця";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/genre.css" asp-append-version="true" />
+
+<div class="edit-genre-page">
+    <div class="edit-genre-header">
+        <span class="edit-genre-label">КЕРУВАННЯ МУЗИКОЮ</span>
+        <h2>Редагування виконавця</h2>
+        <p>Змініть інформацію про виконавця та збережіть оновлення</p>
+    </div>
+
+    <div class="edit-genre-card">
+        <div class="edit-genre-icon">♫</div>
+
+        <form asp-controller="Admin" asp-action="EditSinger" method="post" enctype="multipart/form-data">
+         
+            @if (!string.IsNullOrEmpty(Model.Image))
+            {
+                <div class="singer-card">
+                    <img src="@Model.Image" alt="@Model.Singer" />
+                </div>
+            }
+            <div asp-validation-summary="ModelOnly"
+                 class="edit-genre-validation"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="edit-genre-field">
+                <label asp-for="Singer">Ім'я виконавця</label>
+                <input asp-for="Singer"
+                       class="edit-genre-input"
+                       placeholder="Введіть ім'я виконавця" />
+                <span asp-validation-for="Singer"
+                      class="edit-genre-error"></span>
+            </div>
+
+            <div class="edit-genre-field">
+                <label asp-for="Image" class="form-label fw-bold"></label>
+                 <input name="posterFile" class="form-control" type="file" accept="image/png, image/jpeg" placeholder="Введіть постер" />
+                 <span asp-validation-for="Image" class="text-danger"></span>
+                             </div>
+
+            <button type="submit" class="edit-genre-save">
+                <span>✓</span> Зберегти зміни
+            </button>
+
+            <a asp-controller="Admin"
+               asp-action="Singers"
+               class="edit-genre-back">
+                ← Повернутися до виконавців
+            </a>
+        </form>
+    </div>
+</div>

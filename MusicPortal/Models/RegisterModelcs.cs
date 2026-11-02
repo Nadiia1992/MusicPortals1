@@ -5,28 +5,28 @@ namespace MusicPortal.Models
 {
     public class RegisterModel
     {
-        [Required(ErrorMessage = "Введіть ім'я")]
+        [Required(ErrorMessage = "FirstNameRequired")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Довжина має бути від 2 до 20 символів.")]
         public string? FirstName { get; set; }
 
-        [Required(ErrorMessage = "Введіть прізвище")]
+        [Required(ErrorMessage = "LastNameRequired")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Довжина має бути від 2 до 20 символів.")]
         public string? LastName { get; set; }
 
-        [Required(ErrorMessage = "Введіть логін")]
+        [Required(ErrorMessage = "LoginRequired")]
         public string? Login { get; set; }
 
-        [Required(ErrorMessage = "Поле є обов'язковим для заповнення.")]
+        [Required(ErrorMessage = "EmailRequired")]
         [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Некоректна адреса.")]
         [Display(Name = "Електронна пошта")]
         public string? Email { get; set; }
 
 
-        [Required(ErrorMessage = "Введіть пароль")]
+        [Required(ErrorMessage = "PasswordRequired")]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
 
-        [Required(ErrorMessage = "Підтвердіть пароль")]
+        [Required(ErrorMessage = "PasswordConfirmRequired")]
         [Compare("Password", ErrorMessage = "Паролі не збігаються")]
         [DataType(DataType.Password)]
         public string? PasswordConfirm { get; set; }

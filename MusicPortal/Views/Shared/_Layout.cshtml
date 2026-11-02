@@ -1,4 +1,24 @@
-﻿<!DOCTYPE html>
+﻿﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Options
+
+
+@inject IStringLocalizer<MusicPortal.Resource> Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+
+    var cultureItems = LocOptions.Value.SupportedUICultures
+        .Select(c => new SelectListItem { Value = c.Name, Text = c.NativeName })
+        .ToList();
+
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,6 +37,15 @@
                 </span>
             </a>
 
+            <form asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" class="d-flex align-items-center ms-auto language-form">
+                <select name="culture"
+                        asp-for="@requestCulture!.RequestCulture.UICulture.Name"
+                        asp-items="cultureItems"
+                        class="form-select form-select-sm language-select"
+                        onchange="this.form.submit();">
+                </select>
+            </form>
+
             <nav class="navigat">
                 @{
                     var login = Context.Session.GetString("Login");
@@ -29,16 +58,16 @@
                         Вітаю, @(string.IsNullOrEmpty(firstName) ? login : firstName)!
                     </span>
 
-                    <a asp-controller="Account" asp-action="Admin" class="addsong">
+                    <a asp-controller="Admin" asp-action="Index" class="addsong">
                         <span class="plus">+</span>
-                        Панель адміністратора
+                        @Localizer["AdminPanel"]
                     </a>
 
                     <form asp-controller="Account"
                           asp-action="Logout"
                           method="post"
                           class="logout-form">
-                        <button type="submit" class="logout-btn">Вийти</button>
+                        <button type="submit" class="logout-btn">@Localizer["Logout"]</button>
                     </form>
                 }
 
@@ -49,18 +78,20 @@
                     </span>
                     <a asp-controller="Song" asp-action="Create" class="addsong">
                         <span class="plus">+</span>
-                        Додати пісню
+                        @Localizer["CreateSong"]
                     </a>
                     <form asp-controller="Account" asp-action="Logout" method="post" class="logout-form">
-                        <button type="submit" class="logout-btn">Вийти</button>
+                        <button type="submit" class="logout-btn">@Localizer["Logout"]</button>
                     </form>
                 }
                 else
                 {
-                    <a class="navigation" asp-controller="Account" asp-action="Login">Увійти
+                    <a class="navigation" asp-controller="Account" asp-action="Login">
+                        @Localizer["Enter"]
                     </a>
 
-                    <a class="navigation" asp-controller="Account" asp-action="Register"> Реєстрація
+                    <a class="navigation" asp-controller="Account" asp-action="Register">
+                        @Localizer["Register"]
                     </a>
                 }
             </nav>
@@ -71,10 +102,10 @@
         <aside class="sidebar">
            
             <nav class="sidebar-navigation">
-                <a asp-controller="Home" asp-action="Index"><i data-lucide="house"></i><span>Головна</span></a>
-                <a asp-controller="Song" asp-action="Index"><i data-lucide="music"></i><span>Музика</span></a>
-                <a asp-controller="Genre" asp-action="Start"><i data-lucide="audio-lines"></i><span>Жанри</span></a>
-                <a asp-controller="Singer" asp-action="Show"><i data-lucide="circle-user-round"></i><span>Виконавці</span></a>
+                <a asp-controller="Home" asp-action="Index"><i data-lucide="house"></i><span>@Localizer["Main"]</span></a>
+                <a asp-controller="Song" asp-action="Index"><i data-lucide="music"></i><span>@Localizer["Music"]</span></a>
+                <a asp-controller="Genre" asp-action="Start"><i data-lucide="audio-lines"></i><span>@Localizer["Genres"]</span></a>
+                <a asp-controller="Singer" asp-action="Show"><i data-lucide="circle-user-round"></i><span>@Localizer["Artists"]</span></a>
                 </nav>
                 </aside>
         <main role="main" class="pb-3">

@@ -33,13 +33,19 @@ namespace MusicPortal.Controllers
                 return View(logon);
             }
 
+            if(user.isAccept == false)
+            {
+                ModelState.AddModelError(string.Empty, "Ваш обліковий запис ще не підтверджено!");
+                return View(logon);
+            }
+
             HttpContext.Session.SetString("Login", user.Login!);
             HttpContext.Session.SetString("FirstName", user.FirstName!);
             HttpContext.Session.SetString("LastName", user.LastName!);
 
             if (user.Login == "ADMIN")
             {
-                return RedirectToAction("Admin", "Account");
+                return RedirectToAction("Index", "Admin");
             }
 
             return RedirectToAction("Clients", "Account");
@@ -66,20 +72,29 @@ namespace MusicPortal.Controllers
             string hash = passwordHasher.HashPassword(reg.Password, salt);
 
 
+
             var user = new Users
             {
                 FirstName = reg.FirstName,
                 LastName = reg.LastName,
                 Login = reg.Login,
                 Salt = salt,
-                Password = hash
+                Password = hash,
+                isAccept = reg.Login == "ADMIN"
             };
 
             await re.AddUserAsync(user);
             await re.SaveAsync();
 
-            return RedirectToAction(nameof(Login));
+            return RedirectToAction(nameof(AcceptUser));
         }
+
+
+        public async Task<IActionResult> AcceptUser()
+        {
+            return View();
+        }
+
 
         public IActionResult Logout()
         {
@@ -104,5 +119,27 @@ namespace MusicPortal.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AcceptUser(int id)
+        {
+            if (HttpContext.Session.GetString("Login") != "ADMIN")
+            {
+                return RedirectToAction("Clients", "Account");
+            }
+
+            var user = await re.GetUserAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.isAccept = true;
+
+            await re.SaveAsync();
+
+            return RedirectToAction("AcceptUser", "Admin");
+        }
     }
 }

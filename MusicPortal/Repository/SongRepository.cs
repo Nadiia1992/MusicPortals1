@@ -50,14 +50,18 @@ namespace MusicPortal.Repository
             await context.Songs.AddAsync(item);
         }
 
-        public async Task DeleteSongAsync(Song item)
+        public async Task DeleteSong(int id)
         {
-            context.Songs.Remove(item);
+            var st = await context.Songs.FindAsync(id);
+            if (st != null)
+            {
+                context.Songs.Remove(st);
+            }
         }
 
-        public async Task EditSong(Song item)
+        public void Update(Song si)
         {
-            context.Songs.Update(item);
+            context.Songs.Update(si);
         }
         public Task SaveAsync()
         {

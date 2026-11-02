@@ -9,8 +9,8 @@ namespace MusicPortal.Repository
         Task<Song?> GetSongAsync(int id);
         Task<bool> SongExistsAsync(string name);
         Task AddSongAsync(Song item);
-        Task DeleteSongAsync(Song item);
-        Task EditSong(Song item);
+        Task DeleteSong(int id);
+        void Update(Song si);
         Task SaveAsync();
         Task<IEnumerable<Song>> GetAcceptedSongsAsync();
     }

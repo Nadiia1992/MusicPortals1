@@ -1,50 +1,67 @@
 ﻿@model IEnumerable<MusicPortal.Models.Song>
+
 @{
     ViewData["Title"] = "Пісні на модерації";
 }
-<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
 
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+<div class="for">
+<h2>Пісні на модерації</h2>
+<p>Перегляньте композиції та підтвердьте їх публікацію</p>
+</div>
 @if (Model == null || !Model.Any())
 {
-    <p>Немає пісень на модерації.</p>
+    <div class="empty-moderation">
+        <span>♫</span>
+        <h3>Немає пісень на модерації</h3>
+        <p>Нові композиції з'являться тут після надсилання.</p>
+    </div>
 }
 else
 {
-    @foreach (var item in Model)
-    {
-        <div class="song-card">
-            <div class="song-image">
-                <img src="@item.Foto" alt="@item.NameOfSong" />
+    <div class="songs">
+        @foreach (var item in Model)
+        {
+            <div class="song-card">
+                <div class="song-image">
+                    <img src="@item.Foto" alt="@item.NameOfSong" />
+                </div>
+
+                <div class="song-info">
+                    <h4>@item.NameOfSong</h4>
+                    <h4>@item.Singer?.Singer</h4>
+                    <p>@item.Genre?.Genre</p>
+
+                    <audio controls>
+                        <source src="@item.AudioPath" />
+                        Ваш браузер не підтримує відтворення аудіо.
+                    </audio>
+
+                    <form asp-controller="Song"
+                          asp-action="Accept"
+                          method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+
+                        <button type="submit" class="moderation-accept">
+                            ✓ Підтвердити
+                        </button>
+                    </form>
+
+                    <form asp-controller="Admin" asp-action="DeleteSong" method="get">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" class="delete-genre-btn">
+                            ✕ Відхилити
+                        </button>
+                    </form>
+
+                </div>
             </div>
-            <div class="song-info">
-                <h4>@item.NameOfSong</h4>
-                <h4>@item.Singer?.Singer</h4>
-                <p>@item.Genre?.Genre</p>
-
-                <audio controls>
-                    <source src="@item.AudioPath" />
-                    Ваш браузер не підтримує відтворення аудіо.
-                </audio>
-                <a href="@item.AudioPath"
-                class="download-button"
-                download
-                title="Скачати">
-                    <i data-lucide="download"></i>
-                </a>
-                <form asp-controller="Song"
-                      asp-action="Accept"
-                      method="post">
-                <input type="hidden" name="id" value="@item.Id" />
-
-                <button type="submit" class="save-song-btn">
-                    Підтвердити пісню
-                </button>
-                </form>
-
-            </div>
-        </div>
-    }
+        }
+    </div>
 }
-<a asp-controller="Account" asp-action="Admin">
-    Назад
+
+<a asp-controller="Admin"
+   asp-action="Index"
+   class="moderation-back">
+    ← Назад до панелі адміністратора
 </a>

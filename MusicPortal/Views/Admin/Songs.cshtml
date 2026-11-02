@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MusicPortal.Models.Song>
+
+@{
+    ViewData["Title"] = "Пісні";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/genre.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+
+<div class="addsong-container">
+    <a asp-controller="Song" asp-action="Create" class="addgenre">
+        <span>+</span> Додати пісню
+    </a>
+</div>
+
+<div class="songs">
+    @foreach (var item in Model)
+    {
+        <div class="song-card">
+            <div class="song-image">
+                <img src="@item.Foto" alt="@item.NameOfSong" />
+            </div>
+
+            <div class="song-info">
+                <h4>@item.NameOfSong</h4>
+                <h4>@item.Singer?.Singer</h4>
+                <p>@item.Genre?.Genre</p>
+
+                <audio controls>
+                    <source src="@item.AudioPath" />
+                    Ваш браузер не підтримує відтворення аудіо.
+                </audio>
+            </div>
+
+            <div class="genre-actions">
+                <form asp-controller="Admin" asp-action="EditSong" method="get">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button type="submit" class="moderation-accept">
+                        ✎ Редагувати
+                    </button>
+                </form>
+
+                <form asp-controller="Admin" asp-action="DeleteSong" method="get">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button type="submit" class="delete-genre-btn">
+                        ✕ Видалити
+                    </button>
+                </form>
+            </div>
+        </div>
+    }
+</div>
+
+</div>
+</div>
+</div>

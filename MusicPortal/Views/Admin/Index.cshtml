@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Панель адміністратора";
+}
+
+
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Options
+
+
+@inject IStringLocalizer<MusicPortal.Resource> Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+
+    var cultureItems = LocOptions.Value.SupportedUICultures
+        .Select(c => new SelectListItem { Value = c.Name, Text = c.NativeName })
+        .ToList();
+
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+}
+
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+
+<div class="admin">
+    <div class="admin-header">
+        <h3>@Localizer["AdminPanel"]</h3>
+        <p>@Localizer["AdminInfo"]</p>
+    </div>
+
+    <div class="admin-menu">
+        <a asp-controller="Song" asp-action="forAccept" class="moderation-link">
+            <span class="admin-link-icon">♫</span>
+            <span class="admin-link-text">
+                <strong>
+                    @Localizer["SongsModeration"]</strong>
+                <small>@Localizer["Songs"]</small>
+            </span>
+            <span class="admin-arrow">→</span>
+        </a>
+
+        <a asp-controller="Admin" asp-action="ForAcceptUser" class="moderation-link">
+            <span class="admin-link-icon">♫</span>
+            <span class="admin-link-text">
+                <strong>
+                    @Localizer["UsersModeration"]</strong>
+                <small>@Localizer["UsersInfo"]</small>
+            </span>
+            <span class="admin-arrow">→</span>
+        </a>
+
+        <a asp-controller="Admin" asp-action="Users" class="moderation-link">
+            <span class="admin-link-icon">♫</span>
+            <span class="admin-link-text">
+                <strong>@Localizer["Users"]</strong>
+                <small>@Localizer["Usersdescription"]</small>
+            </span>
+            <span class="admin-arrow">→</span>
+        </a>
+
+        <a asp-controller="Admin" asp-action="Songs" class="moderation-link">
+            <span class="admin-link-icon">♫</span>
+            <span class="admin-link-text">
+                <strong>
+                    @Localizer["SongManegement"]</strong>
+                <small>@Localizer["SongManegementInfo"]</small>
+            </span>
+            <span class="admin-arrow">→</span>
+        </a>
+
+        <a asp-controller="Admin" asp-action="Singers" class="moderation-link">
+            <span class="admin-link-icon">♬</span>
+            <span class="admin-link-text">
+                <strong>@Localizer["SingerManagement"]</strong>
+                <small>@Localizer["SingerManagementInfo"]</small>
+            </span>
+            <span class="admin-arrow">→</span>
+        </a>
+
+        <a asp-controller="Admin" asp-action="Genres" class="moderation-link">
+            <span class="admin-link-icon">♫</span>
+            <span class="admin-link-text">
+                <strong>@Localizer["GenreManagement"]</strong>
+                <small>@Localizer["GenreManagementInfo"]</small>
+            </span>
+            <span class="admin-arrow">→</span>
+        </a>
+    </div>
+</div>

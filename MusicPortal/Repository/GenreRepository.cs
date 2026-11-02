@@ -29,19 +29,40 @@ namespace MusicPortal.Repository
         {
             return await context.Genres.AnyAsync(g => g.Genre == name);
         }
+
+        public async Task<bool> HasSongsAsync(int genreId)
+        {
+            return await context.Songs
+                .AnyAsync(s => s.GenreId == genreId);
+        }
+
         public async Task AddGenreAsync(Genres item)
         {
             await context.Genres.AddAsync(item);
         }
 
-        public async Task DeleteGenre(Genres item)
+        public async Task DeleteGenre(int id)
         {
-            context.Genres.Remove(item);
+            var genre = await context.Genres
+                .Include(g => g.Songs)
+                .FirstOrDefaultAsync(g => g.Id == id);
+
+            if (genre != null)
+            {
+                context.Songs.RemoveRange(genre.Songs);
+                context.Genres.Remove(genre);
+            }
         }
+
 
         public async Task SaveAsync()
         {
             await context.SaveChangesAsync();
+        }
+
+        public void Update(Genres ge)
+        {
+            context.Genres.Update(ge);
         }
     }
 }

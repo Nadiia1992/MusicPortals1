@@ -9,8 +9,8 @@ namespace MusicPortal.Models
         public int Id { get; set; }
 
 
-        [Required(ErrorMessage = "Будь ласка, введіть Жанр")]
-        [Display(Name = "Жанр")]
+        [Required(ErrorMessage = "GenreRequired")]
+        [Display(Name = "Genre")]
         public required string Genre { get; set; }
 
         public ICollection<Song> Songs { get; set; } = new List<Song>();

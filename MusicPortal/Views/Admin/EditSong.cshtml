@@ -1,0 +1,73 @@
+﻿@model MusicPortal.Models.Song
+
+@{
+    ViewData["Title"] = "Редагувати пісню";
+
+}
+
+<link rel="stylesheet" href="~/css/genre.css" asp-append-version="true" />
+
+<main class="create-song-page">
+    <div class="create-song-container">
+
+        <div class="create-song-card">
+            <form asp-controller="Admin" asp-action="EditSong" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="singer-card">
+                    <img src="@Url.Content(Model.Foto)" alt="@Model.NameOfSong" class="delete-img" />
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="NameOfSong" class="form-label">Назва пісні</label>
+                    <input asp-for="NameOfSong" class="form-control music-input" placeholder="Введіть назву пісні" />
+                    <span asp-validation-for="NameOfSong" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Foto" class="form-label fw-bold"></label>
+                    <input name="posterFile" class="form-control" type="file" accept="image/png, image/jpeg" placeholder="Введіть фото" />
+                    <span asp-validation-for="Foto" class="text-danger"></span>
+                </div>
+
+
+                <div class="mb-4">
+                    <label for="audioFile" class="form-label"> Аудіофайл пісні</label>
+                    <input type="file" id="audioFile" name="audioFile" class="music-input" accept="audio/*" />
+                </div>
+
+
+                <div class="mb-4">
+                    <label asp-for="SingersId" class="form-label">Виконавець</label>
+
+                    <select asp-for="SingersId" asp-items="ViewBag.Singers" class="form-select music-input">
+                        <option value="0">Оберіть виконавця зі списку</option>
+                    </select>
+
+                    <span asp-validation-for="SingersId" class="text-danger"></span>
+                </div>
+
+
+                <div class="mb-4">
+                    <label asp-for="GenreId" class="form-label">Жанр</label>
+                    <select asp-for="GenreId" asp-items="ViewBag.Genres" class="form-select music-input">
+                        <option value="">Оберіть жанр</option>
+                    </select>
+                    <span asp-validation-for="GenreId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <a asp-controller="Admin" asp-action="Songs" class="edit-genre-back">
+                        ← Повернутися
+                    </a>
+
+                    <button type="submit" class="edit-genre-save">
+                        <span>＋</span> Pедагувати
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>

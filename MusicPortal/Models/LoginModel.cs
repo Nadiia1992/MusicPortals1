@@ -4,10 +4,10 @@ namespace MusicPortal.Models
 {
     public class LoginModel
     {
-        [Required(ErrorMessage = "Введіть логін")]
+        [Required(ErrorMessage = "LoginRequired")]
         public string? Login { get; set; }
 
-        [Required(ErrorMessage = "Введіть пароль")]
+        [Required(ErrorMessage = "PasswordRequired")]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
     }

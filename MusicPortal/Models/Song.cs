@@ -9,13 +9,13 @@ namespace MusicPortal.Models
         public int Id { get; set; }
 
 
-        [Required(ErrorMessage = "Поле є обов'язковим для заповнення")]
+        [Required(ErrorMessage = "NameOfSongRequired")]
         [StringLength(500, MinimumLength = 5, ErrorMessage = "Довжина має бути від 5 до 500 символів.")]
         [Display(Name = "Назва")]
         public string? NameOfSong { get; set; }
 
 
-        [Display(Name = "Фото")]
+        [Display(Name = "Photo")]
         public string? Foto { get; set; }
         public string? AudioPath { get; set; }
 

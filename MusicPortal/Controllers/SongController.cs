@@ -30,7 +30,7 @@ namespace MusicPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Song song, IFormFile? posterFile, IFormFile? audioFile, string? newSingerName)
+        public async Task<IActionResult> Create(Song song, IFormFile? posterFile, IFormFile? audioFile)
         { 
             if (posterFile == null || posterFile.Length == 0)
             {
@@ -59,7 +59,14 @@ namespace MusicPortal.Controllers
             }
 
             song.UserId = user.Id;
-            song.IsAccept = false;
+            if (HttpContext.Session.GetString("Login") == "ADMIN")
+            {
+                song.IsAccept = true;
+            }
+            else
+            {
+                song.IsAccept = false;
+            }
 
             if (!ModelState.IsValid)
             {
@@ -71,22 +78,10 @@ namespace MusicPortal.Controllers
 
             Directory.CreateDirectory(uploadsFolder);
 
-            if (!string.IsNullOrWhiteSpace(newSingerName))
-            {
-                var singer = new Singers
-                {
-                    Singer = newSingerName.Trim()
-                };
-
-                await repositorySinger.AddSingerAsync(singer);
-                await repositorySinger.SaveAsync();
-
-                song.SingersId = singer.Id;
-            }
-            else if (song.SingersId <= 0)
+            if (song.SingersId <= 0)
             {
                 ModelState.AddModelError(nameof(song.SingersId),
-                    "Оберіть виконавця або введіть ім'я нового.");
+                    "Оберіть виконавця.");
 
                 await LoadLists();
                 return View(song);
@@ -95,8 +90,9 @@ namespace MusicPortal.Controllers
             if (posterFile is not null && posterFile.Length > 0)
             {
                 var fileName = Path.GetFileName(posterFile.FileName);
-                var relativePath = $"/picture/{fileName}";
-                var absolutePath = Path.Combine(appEnvironment.WebRootPath, "picture", fileName);
+                var relativePath = $"/image/{fileName}";
+                var absolutePath = Path.Combine(
+                    appEnvironment.WebRootPath, "image", fileName);
 
                 await using (var fileStream = new FileStream(absolutePath, FileMode.Create))
                 {
@@ -119,12 +115,16 @@ namespace MusicPortal.Controllers
                 song.AudioPath = relativePath;
                 
             }
-  
-
             await repositorySong.AddSongAsync(song);
             await repositorySong.SaveAsync();
 
+            if (song.IsAccept == false)
+            {
+                return RedirectToAction("AcceptSong", "Song");
+            }
+
             return RedirectToAction("Index", "Song");
+
         }
 
         private async Task LoadLists()
@@ -151,6 +151,12 @@ namespace MusicPortal.Controllers
             return View(songs);
         }
 
+        public async Task<IActionResult> AcceptSong()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Accept(int id)
@@ -171,7 +177,7 @@ namespace MusicPortal.Controllers
 
             await repositorySong.SaveAsync();
 
-            return RedirectToAction("Admin", "Account");
+            return RedirectToAction("forAccept", "Song");
         }
     }
 }

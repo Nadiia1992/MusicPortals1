@@ -1,8 +1,12 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
+using MusicPortal;
 using MusicPortal.Models;
 using MusicPortal.Repository;
 using MusicPortal.Services;
+using System.Globalization;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,8 +22,31 @@ string? connection = builder.Configuration.GetConnectionString("DefaultConnectio
 
 builder.Services.AddDbContext<MusicContext>(options => options.UseSqlServer(connection));
 
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-builder.Services.AddControllersWithViews();
+
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization(options => {
+        options.DataAnnotationLocalizerProvider = (type, factory) =>
+            factory.Create(typeof(Resource));
+    });
+
+var supportedCultures = new[]
+{
+    new CultureInfo("uk"),
+    new CultureInfo("en"),
+    new CultureInfo("de"),
+    new CultureInfo("fr")
+};
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("uk");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
+
 
 builder.Services.AddScoped<IRepositoryUser, UserRepository>();
 builder.Services.AddScoped<IRepositorySong, SongRepository>();
@@ -29,6 +56,7 @@ builder.Services.AddScoped<PasswordHasher>();
 
 
 var app = builder.Build();
+app.UseRequestLocalization();
 app.UseStaticFiles();
 
 app.UseSession();

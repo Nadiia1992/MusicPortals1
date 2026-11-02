@@ -11,7 +11,9 @@ namespace MusicPortal.Repository
         Task<Singers?> GetSingerAsync(int id);
         Task<bool> SingerExistsAsync(string name);
         Task AddSingerAsync(Singers item);
-        Task DeleteSinger(Singers item);
+        Task DeleteSinger(int id);
+
+        void Update(Singers si);
         Task SaveAsync();
       
     } 

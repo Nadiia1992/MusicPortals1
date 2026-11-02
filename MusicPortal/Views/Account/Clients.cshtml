@@ -3,12 +3,33 @@
     ViewData["Title"] = "Клієнт";
 
 }
+
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Options
+
+
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+@inject IStringLocalizer<MusicPortal.Resource> Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+
+    var cultureItems = LocOptions.Value.SupportedUICultures
+        .Select(c => new SelectListItem { Value = c.Name, Text = c.NativeName })
+        .ToList();
+
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+}
+
 <link rel="stylesheet" href="~/css/client.css" asp-append-version="true" />
 
 <section class="hero">
     <div class="hero-content">
-        <h1>Відчуй музику. Живи ритмом. 🎧</h1>
-        <p>Ласкаво просимо у світ музики! Відкривай нові треки, знаходь улюблених виконавців і насолоджуйся музикою, яка надихає. Усе найкраще зі світу музики — в одному місці. 🎶</p>
+        <h1>@Localizer["Title"]</h1>
+        <p>@Localizer["Info"]</p>
     </div>
 
     <img class="main-photo" src="~/picture/startfoto.jpg" alt="Стартова фотографія" />
@@ -17,7 +38,7 @@
 
             <div class="addsong-container">
                 <a asp-controller="Song" asp-action="Create" class="addsong">
-                    <span class="plus">+</span> Додати пісню
+        <span class="plus">+</span>@Localizer["CreateSong"]
                 </a>
             </div>
 <div class="songs">

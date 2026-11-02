@@ -13,7 +13,7 @@ namespace MusicPortal.Models
 
         public string? Password { get; set; }
         public string? Salt { get; set; }
-
+        public bool isAccept { get; set; } = false;
         public ICollection<Song> Songs { get; set; } = new List<Song>();
     }
 }

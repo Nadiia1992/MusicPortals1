@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MusicPortal.Models.Users>
+
+@{
+    ViewData["Title"] = "Користувачі";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/genre.css" asp-append-version="true" />
+
+<div class="create-genre-page">
+
+    <div class="genreAdmin-page">
+        <div class="Admingenres">
+            @foreach (var item in Model)
+            {
+                <div class="genreAdmin-card">
+          
+                        <h4>@item.FirstName @item.LastName</h4>
+                    <h4>@item.Login</h4>
+                    <h4>@item.Email</h4>
+
+                        <form asp-controller="Admin" asp-action="DeleteUser" method="get">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="delete-genre-btn">
+                                ✕ Видалити
+                            </button>
+                        </form>
+                    </div>
+            }
+
+        </div>
+    </div>
+</div>

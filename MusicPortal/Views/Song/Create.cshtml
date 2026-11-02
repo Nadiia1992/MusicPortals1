@@ -34,10 +34,7 @@
                         <label for="audioFile" class="form-label"> Аудіофайл пісні</label>
                         <input type="file" id="audioFile" name="audioFile" class="music-input" accept="audio/*"/>
                     </div>
-
-                    
-                    <div class="mb-4">
-                        <label asp-for="SingersId" class="form-label">Оберіть виконавця</label>
+                
                    
                     <div class="mb-4">
                         <label asp-for="SingersId" class="form-label">Виконавець</label>
@@ -49,12 +46,6 @@
                         <span asp-validation-for="SingersId" class="text-danger"></span>
                     </div>
 
-                    <div class="mb-4">
-                        <label for="newSingerName" class="form-label">Або додайте нового виконавця</label>
-
-                        <input type="text" id="newSingerName" name="newSingerName" class="form-control music-input"
-                         placeholder="Введіть ім'я нового виконавця" maxlength="100" />
-                    </div>
 
                     <div class="mb-4">
                         <label asp-for="GenreId" class="form-label">Жанр</label>

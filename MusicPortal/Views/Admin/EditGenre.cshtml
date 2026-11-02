@@ -1,0 +1,46 @@
+﻿@model MusicPortal.Models.Genres
+
+@{
+    ViewData["Title"] = "Редагування жанру";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/genre.css" asp-append-version="true" />
+
+<div class="edit-genre-page">
+    <div class="edit-genre-header">
+        <span class="edit-genre-label">КЕРУВАННЯ МУЗИКОЮ</span>
+        <h1>Редагування жанру</h1>
+        <p>Змініть назву жанру та збережіть оновлення</p>
+    </div>
+
+    <div class="edit-genre-card">
+        <div class="edit-genre-icon">♫</div>
+
+        <form asp-action="EditGenre" method="post">
+            <div asp-validation-summary="ModelOnly"
+                 class="edit-genre-validation"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="edit-genre-field">
+                <label asp-for="Genre">Назва жанру</label>
+                <input asp-for="Genre"
+                       class="edit-genre-input"
+                       placeholder="Наприклад, рок, поп, джаз..." />
+                <span asp-validation-for="Genre"
+                      class="edit-genre-error"></span>
+            </div>
+
+            <button type="submit" class="edit-genre-save">
+                <span>✓</span> Зберегти зміни
+            </button>
+
+            <a asp-controller="Admin"
+               asp-action="Genres"
+               class="edit-genre-back">
+                ← Повернутися до жанрів
+            </a>
+        </form>
+    </div>
+</div>

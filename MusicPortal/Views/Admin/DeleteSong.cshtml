@@ -1,0 +1,46 @@
+﻿@model MusicPortal.Models.Song
+
+@{
+    ViewData["Title"] = "Видалення пісні";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/genre.css" asp-append-version="true" />
+
+<div class="edit-genre-page delete-genre-page">
+
+
+    <div class="delete-genre-card">
+        <div class="delete-genre-icon">!</div>
+
+        <h2 class="delete-genre-title">Ви впевнені?</h2>
+
+        <p class="delete-genre-description">
+            Ви збираєтеся видалити пісню:
+        </p>
+        <div class="singer-card">
+            <img src="@Model.Foto" alt="@Model.NameOfSong" />
+        </div>
+        <div class="delete-genre-name">
+            ♫ @Model.NameOfSong
+        </div>
+
+        <p class="delete-genre-warning">
+            Цю дію може бути неможливо скасувати.
+        </p>
+
+        <form asp-action="DeleteConfirmedSong" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <button type="submit" class="delete-genre-confirm">
+                <span>✕</span> Так, видалити
+            </button>
+
+            <a asp-controller="Admin"
+               asp-action="Songs"
+               class="edit-genre-back">
+                ← Скасувати та повернутися
+            </a>
+        </form>
+    </div>
+</div>

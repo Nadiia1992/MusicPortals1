@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MusicPortal.Models.Singers>
+
+@{
+    ViewData["Title"] = "Виконавці";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/genre.css" asp-append-version="true" />
+
+<div class="create-genre-page">
+
+    <div class="addsong-container">
+        <a asp-controller="Admin" asp-action="CreateSinger" class="addgenre">
+            <span>+</span> Додати виконавця
+        </a>
+    </div>
+    <div class="genreAdmin-page">
+        <div class="Admingenres">
+            @foreach (var item in Model)
+            {
+                <div class="genreAdmin-card">
+                    <a asp-controller="Singer"
+                       asp-action="Info"
+                       asp-route-id="@item.Id"
+                       class="genre-container">
+                        <div class="singer-card">
+                            <img src="@item.Image" alt="@item.Singer" />
+                        </div>
+                        <h4>@item.Singer</h4>
+                    </a>
+
+                    <div class="genre-actions">
+                        <form asp-controller="Admin" asp-action="EditSinger" method="get">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="moderation-accept">
+                                ✎ Редагувати
+                            </button>
+                        </form>
+
+                        <form asp-controller="Admin" asp-action="DeleteSinger" method="get">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="delete-genre-btn">
+                                ✕ Видалити
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+    </div>
+</div>

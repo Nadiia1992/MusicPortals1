@@ -1,0 +1,44 @@
+﻿@model MusicPortal.Models.Users
+
+@{
+    ViewData["Title"] = "Видалення користувача";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/genre.css" asp-append-version="true" />
+
+<div class="edit-genre-page delete-genre-page">
+
+
+    <div class="delete-genre-card">
+        <div class="delete-genre-icon">!</div>
+
+        <h2 class="delete-genre-title">Ви впевнені?</h2>
+
+        <p class="delete-genre-description">
+            Ви збираєтеся видалити користувача:
+        </p>
+
+        <div class="delete-genre-name">
+            ♫ @Model.Login
+        </div>
+
+        <p class="delete-genre-warning">
+            Цю дію може бути неможливо скасувати.
+        </p>
+
+        <form asp-action="DeleteConfirmedUser" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <button type="submit" class="delete-genre-confirm">
+                <span>✕</span> Так, видалити користувача
+            </button>
+
+            <a asp-controller="Admin"
+               asp-action="Users"
+               class="edit-genre-back">
+                ← Скасувати та повернутися
+            </a>
+        </form>
+    </div>
+</div>

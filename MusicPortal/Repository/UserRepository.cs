@@ -11,7 +11,12 @@ namespace MusicPortal.Repository
 
         public async Task<IEnumerable<Users>> GetUserListAsync()
         {
-            return await context.User.AsNoTracking().ToListAsync();
+            return await context.User.AsNoTracking().Where(p => !p.isAccept).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Users>> GetAcceptedUserListAsync()
+        {
+            return await context.User.AsNoTracking().Where(p => p.isAccept).ToListAsync();
         }
 
         public async Task<Users?> GetUserAsync(int id)
@@ -33,6 +38,15 @@ namespace MusicPortal.Repository
         public async Task SaveAsync()
         {
             await context.SaveChangesAsync();
+        }
+
+        public async Task DeleteUser(int id)
+        {
+            var user = await context.User.FindAsync(id);
+            if (user != null)
+            {
+                context.User.Remove(user);
+            }
         }
     }
 }
